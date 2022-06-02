@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: purple;
+}
+
+.calculator {
+  display: grid;
+  font-family: Inconsolata;
+  height: 300px;
+  width: 200px;
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 8px 6px;
+  padding: 20px 10px;
+  margin-top: 40px;
+  border: 0;
+  border-radius: 10px;
+  background-color: rgb(255, 167, 5);
+  box-shadow: rgba(190, 190, 190, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.display {
+  font-size: 16px;
+  text-align: right;
+  grid-column: span 4;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(255, 255, 255);
+  padding: 8px 4px;
+  box-shadow: rgb(228, 229, 230) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.calculator button {
+  font-family: inherit;
+  border-radius: 50px;
+  border: 0;
+  user-select: none;
+  cursor: pointer;
+  background-color: rgb(255, 250, 177);
+  box-shadow: rgba(17, 17, 26, 0.15) 0px 2px 8px, rgba(17, 17, 26, 0.1) 0px 4px 10px, rgba(17, 17, 26, 0.1) 0px 4px 4px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.calculator button:hover {
+  background-color: rgb(241, 234, 128);
+  transform: translate(0, -3px);
+}
+
+.calculator button:active {
+  transform: translate(0, 2px);
+}
+
+.calculator .remove {
+  background-color: rgb(214, 214, 214);
+}
+
+.calculator .remove:hover {
+  background-color: rgb(187, 187, 187);
+}
+
+.calculator .operator {
+  background-color: rgb(255, 201, 102);
+}
+
+.calculator .operator:hover {
+  background-color: rgb(236, 180, 76);
+}
+
+.calculator .operate {
+  background-color: rgb(165, 148, 128);
+}
+
+.calculator .operate:hover {
+  background-color: rgb(145, 130, 113);
+}
+
+.span-2 {
+  grid-column: span 2;
+}
