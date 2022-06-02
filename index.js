@@ -144,17 +144,17 @@ document.querySelectorAll('.calculator button').forEach(
   }));
 
 function add(x, y) {
-  return `${(x + y)}`;
+  return `${+(x + y).toFixed(15)}`;
 }
 
 function subtract(x, y) {
-  return `${x - y}`;
+  return `${+(x - y).toFixed(15)}`;
 }
 
 function multiply(x, y) {
-  return `${x * y}`;
+  return `${+(x * y).toFixed(15)}`;
 }
 
 function divide(x, y) {
-  return `${x / y}`;
+  return `${+(x / y).toFixed(15)}`;
 }
