@@ -8,7 +8,7 @@ const display = document.querySelector('.display');
 
 // params: input, string, [0-9]
 function updateOperand(input) {
-  if (justEquated) {
+  if (justEquated && operatorActive == null) {
     justEquated = false;
     operandOne = '0';
   }
@@ -140,11 +140,13 @@ document.querySelectorAll('.calculator button').forEach(
       del();
     } else if (btn.dataset.value === 'add' || btn.dataset.value === 'subtract' || btn.dataset.value === 'multiply' || btn.dataset.value === 'divide') {
       if (!btn.classList.contains('operator-active')) {
-        clearOperators();
+        document.querySelectorAll('.operator').forEach(btn => btn.classList.remove('operator-active'));
         selectOperator(btn.dataset.value);
         btn.classList.add('operator-active');
       } else {
         clearOperators();
+        display.textContent = operandOne;
+        operandTwo = null;
       }
     } else if (btn.dataset.value === 'equals') {
       equate();
