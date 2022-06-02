@@ -9,12 +9,20 @@ const display = document.querySelector('.display');
 // params: input, string, [0-9]
 function updateOperand(input) {
   if (operatorActive == null) {
-    if (operandOne === '0') {
+    if (input === '.' && operandOne.includes('.')) {
+      return;
+    } else if (input === '.' && operandOne === '0') {
+      operandOne = '0';
+    } else if (operandOne === '0') {
       operandOne = '';
     }
     operandOne += input;
   } else {
-    if (operandTwo === null) {
+    if (input === '.' && operandTwo.includes('.')) {
+      return;
+    } else if (input === '.' && operandTwo === null) {
+      operandTwo = '0';
+    } else if (operandTwo === null) {
       operandTwo = '';
     }
     operandTwo += input;
@@ -109,6 +117,8 @@ document.querySelectorAll('.calculator button').forEach(
   btn => btn.addEventListener('click', () => {
     if (Number.isInteger(+btn.dataset.value)) {
       updateOperand(btn.dataset.value);
+    } else if (btn.dataset.value === 'decimal') {
+      updateOperand('.');
     } else if (btn.dataset.value === 'ac') {
       ac();
     } else if (btn.dataset.value === 'del') {
