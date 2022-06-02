@@ -31,6 +31,9 @@ function updateDisplay() {
 }
 
 function selectOperator(operator) {
+  if (operandTwo != null) {
+    equate();
+  }
   operandTwo = null; // When a new operator is selected, operandTwo should reset.
   switch (operator) {
     case 'add':
@@ -44,9 +47,6 @@ function selectOperator(operator) {
       break;
     case 'divide':
       operatorActive = divide;
-      break;
-    case null:
-      operatorActive = null;
       break;
   }
 }
@@ -68,7 +68,7 @@ function equate() {
     operandOne = operatorActive(+operandOne, +operandTwo);
     console.log('Both operands');
   }
-  selectOperator(null);
+  operatorActive = null;
   updateDisplay();
 }
 
