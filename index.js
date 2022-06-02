@@ -68,14 +68,23 @@ function equate() {
     operandOne = operatorActive(+operandOne, +operandTwo);
     console.log('Both operands');
   }
+  if (operandTwo === '0' && operatorActive == divide) {
+    display.textContent = "you can't divide by 0!";
+    reset();
+    return;
+  }
   operatorActive = null;
   updateDisplay();
 }
 
-function ac() {
+function reset() {
   operandOne = '0'; 
   operandTwo = null;
   operatorActive = null;
+}
+
+function ac() {
+  reset();
   updateDisplay();
 }
 
