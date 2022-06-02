@@ -153,6 +153,46 @@ document.querySelectorAll('.calculator button').forEach(
     }
   }));
 
+  document.addEventListener('keydown', e => {
+    if (Number.isInteger(+e.key)) {
+      updateOperand(e.key);
+    } else if (e.key === '.') {
+      updateOperand('.');
+    } else if (e.key === 'Delete') {
+      ac();
+    } else if (e.key === 'Backspace') {
+      del();
+    } else if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+      let operatorPressed;
+      switch (e.key) {
+        case '+':
+          operatorPressed = 'add';
+          break;
+        case '-':
+          operatorPressed = 'subtract';
+          break;
+        case '*':
+          operatorPressed = 'multiply';
+          break;
+        case '/':
+          operatorPressed = 'divide';
+          break;
+      }
+      btn = document.querySelector(`[data-value=${operatorPressed}]`);
+      if (!btn.classList.contains('operator-active')) {
+        document.querySelectorAll('.operator').forEach(btn => btn.classList.remove('operator-active'));
+        selectOperator(btn.dataset.value);
+        btn.classList.add('operator-active');
+      } else {
+        clearOperators();
+        display.textContent = operandOne;
+        operandTwo = null;
+      }
+    } else if (e.key === 'Enter') {
+      equate();
+    }
+  });
+
 function add(x, y) {
   return `${+(x + y).toFixed(15)}`;
 }
