@@ -3,11 +3,15 @@
 let operandOne = '0'; 
 let operandTwo = null;
 let operatorActive = null; // Used also to check if operandTwo should be updated instead of operandOne.
-
+let justEquated = false;
 const display = document.querySelector('.display');
 
 // params: input, string, [0-9]
 function updateOperand(input) {
+  if (justEquated) {
+    justEquated = false;
+    operandOne = '0';
+  }
   if (operatorActive == null) {
     if (input === '.' && operandOne.includes('.')) {
       return;
@@ -39,6 +43,7 @@ function updateDisplay() {
 }
 
 function selectOperator(operator) {
+  justEquated = false;
   if (operandTwo != null) {
     equate();
   }
@@ -82,6 +87,7 @@ function equate() {
     return;
   }
   operatorActive = null;
+  justEquated = true;
   updateDisplay();
 }
 
@@ -89,6 +95,7 @@ function reset() {
   operandOne = '0'; 
   operandTwo = null;
   operatorActive = null;
+  justEquated = false;
 }
 
 function ac() {
@@ -103,11 +110,17 @@ function del() {
     } else {
       operandOne = '0';
     }
+    if (operandOne.charAt(operandOne.length - 1) === '.') {
+      operandOne = operandOne.slice(0, -1);
+    }
   } else {
     if (operandTwo.length > 1) {
       operandTwo = operandTwo.slice(0, -1);
     } else {
       operandTwo = '0';
+    }
+    if (operandTwo.charAt(operandTwo.length - 1) === '.') {
+      operandTwo = operandTwo.slice(0, -1);
     }
   }
   updateDisplay();
@@ -131,7 +144,7 @@ document.querySelectorAll('.calculator button').forEach(
   }));
 
 function add(x, y) {
-  return `${(x + y).toFixed(11)}`;
+  return `${(x + y)}`;
 }
 
 function subtract(x, y) {
