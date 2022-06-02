@@ -18,10 +18,10 @@ function updateOperand(input) {
     }
     operandOne += input;
   } else {
-    if (input === '.' && operandTwo.includes('.')) {
-      return;
-    } else if (input === '.' && operandTwo === null) {
+    if (input === '.' && operandTwo === null) {
       operandTwo = '0';
+    } else if (input === '.' && operandTwo.includes('.')) {
+      return;
     } else if (operandTwo === null) {
       operandTwo = '';
     }
@@ -131,7 +131,7 @@ document.querySelectorAll('.calculator button').forEach(
   }));
 
 function add(x, y) {
-  return `${x + y}`;
+  return `${(x + y).toFixed(11)}`;
 }
 
 function subtract(x, y) {
