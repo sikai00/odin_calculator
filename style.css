@@ -82,3 +82,13 @@ body {
 .span-2 {
   grid-column: span 2;
 }
+
+.calculator .operator-active {
+  background-color: rgb(196, 223, 122);
+  transform: translate(0, 2px);
+}
+
+.calculator .operator-active:hover {
+  background-color: rgb(196, 223, 122);
+  transform: translate(0, 2px);
+}

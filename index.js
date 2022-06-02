@@ -67,7 +67,6 @@ function selectOperator(operator) {
 function equate() {
   if (operatorActive == null) {
     // No operator is selected. Nothing happens.
-    console.log('No operator');
     return;
   }
   if (operandTwo === null) {
@@ -75,18 +74,16 @@ function equate() {
     // operandOne is used as operandTwo.
     operandTwo = operandOne;
     operandOne = operatorActive(+operandOne, +operandTwo);
-    console.log('Single operand');
   } else {
     // Operator and both operands exist. The operation is applied.
     operandOne = operatorActive(+operandOne, +operandTwo);
-    console.log('Both operands');
   }
   if (operandTwo === '0' && operatorActive == divide) {
     display.textContent = "you can't divide by 0!";
     reset();
     return;
   }
-  operatorActive = null;
+  clearOperators();
   justEquated = true;
   updateDisplay();
 }
@@ -94,7 +91,7 @@ function equate() {
 function reset() {
   operandOne = '0'; 
   operandTwo = null;
-  operatorActive = null;
+  clearOperators();
   justEquated = false;
 }
 
@@ -126,6 +123,11 @@ function del() {
   updateDisplay();
 }
 
+function clearOperators() {
+  document.querySelectorAll('.operator').forEach(btn => btn.classList.remove('operator-active'));
+  operatorActive = null;
+}
+
 document.querySelectorAll('.calculator button').forEach(
   btn => btn.addEventListener('click', () => {
     if (Number.isInteger(+btn.dataset.value)) {
@@ -137,7 +139,13 @@ document.querySelectorAll('.calculator button').forEach(
     } else if (btn.dataset.value === 'del') {
       del();
     } else if (btn.dataset.value === 'add' || btn.dataset.value === 'subtract' || btn.dataset.value === 'multiply' || btn.dataset.value === 'divide') {
-      selectOperator(btn.dataset.value);
+      if (!btn.classList.contains('operator-active')) {
+        clearOperators();
+        selectOperator(btn.dataset.value);
+        btn.classList.add('operator-active');
+      } else {
+        clearOperators();
+      }
     } else if (btn.dataset.value === 'equals') {
       equate();
     }
